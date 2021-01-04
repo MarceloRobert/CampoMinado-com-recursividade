@@ -640,7 +640,9 @@ campo[linha][coluna] -= 10;
 (*pontuacao)++;
 printcampo(campo, tammaximo);
 //printf("\n%d\n%d\n", *numerocasas, *pontuacao); //PARA DEBUG
-system("sleep 0.1"); //Função para dar um delay no console, em segundos. (porém essa funciona pode-se colocar décimo de segundo, ao contrário da função sleep() da biblioteca unistd.h)
+system("sleep 0.2"); //Função para dar um delay no console, em segundos. (porém essa funciona pode-se colocar décimo de segundo, ao contrário da função sleep() da biblioteca unistd.h)
+system("clear");
+
 
 //Aqui é possível perceber a validação dos dados antes de ir para qualquer lado.
 //O efetivo funcionamento da função é assim: se a casa ao lado é um 10, ele pula para aquela casa e refaz toda a função, se não for 10, mas estiver fechada, ele abre a casa sem entrar na função novamente e aumenta as outras variáveis (numcasas e pontuacao), se estiver entre 0 e 9 não acontece nada, é ignorado.
