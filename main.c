@@ -71,7 +71,6 @@ int main (void) {
       {
         case 0:
       		system("clear");
-      		printf("Carregando Regras...\n");
       		printf("-------------------------------------------------------------------------------\n");
       		printf("--------------------------------COMO JOGAR-------------------------------------\n");
       		printf("-------------------------------------------------------------------------------\n");
@@ -109,19 +108,16 @@ int main (void) {
         	//Define o nível de dificuldade do jogo
         	switch (dificuldade){
         		case 1:
-            	printf("Dificuldade definida como Fácil!\n\n");
             	tammaximo = 9;
 							qntbombas = 6;
 							strcpy(rank[0].dificuldade, "Fácil");
             	break;
         		case 2:
-            	printf("Dificuldade definida como Médio!\n\n");
             	tammaximo = 12;
 							qntbombas = 15;
 							strcpy(rank[0].dificuldade, "Médio");
             	break;
         		case 3:
-            	printf("Dificuldade definida como Difícil!\n\n");
             	tammaximo = 15;
 							qntbombas = 20;
 							strcpy(rank[0].dificuldade, "Difícil");
@@ -138,7 +134,6 @@ int main (void) {
 
     		case 2:
       		system("clear");
-      		printf("Carregando créditos...\n");
       		printf("-------------------------------------------------------------------------------\n");
       		printf("----------------------------------CRÉDITOS-------------------------------------\n");
       		printf("-------------------------------------------------------------------------------\n");
@@ -194,11 +189,15 @@ int main (void) {
   		}
 
   	if(aux==1){
+			system("clear");
+			printf("Dificuldade definida como %s!\nTudo pronto, aperte qualquer tecla para iniciar.", rank[0].dificuldade);
+			getchar();
+			getchar();
  			construircampo(tammaximo, qntbombas, campo);
 			while(ganhou==1 && numerocasas <((tammaximo*tammaximo)-qntbombas)){
     		printcampo(campo, tammaximo);
 				//printf("\n%d\n%d\n", numerocasas, pontuacao); //PARA DEBUG
-    		printf("\n Digite a linha e a coluna:");
+    		printf("\n Digite a linha e a coluna: ");
     		scanf("%d %d", &posicao1, &posicao2);
     		if(posicao1 <= tammaximo && posicao1 >= 0 && posicao2 <= tammaximo && posicao2 >= 0){
       		switch(campo[posicao1-1][posicao2-1]-10){
@@ -484,6 +483,8 @@ void showtab(int campo[][15], int tammaximo)
 }
 
 /*
+Função antiga para abrir as casas ao redor das casas 0, não usa recursividade e é ruim
+
 void abrirzero(int campo[][15], int linhai, int colunai, int tammaximo, int *numcasas, int *pontuacao){
   int i, j, k;
 	int pararc=0, pararl=0, parark=0;
@@ -639,10 +640,10 @@ campo[linha][coluna] -= 10;
 (*pontuacao)++;
 printcampo(campo, tammaximo);
 //printf("\n%d\n%d\n", *numerocasas, *pontuacao); //PARA DEBUG
-system("sleep 0.3"); //Função para dar um delay no console, em segundos. (porém essa funciona se colocar décimo de segundo, ao contrário da função sleep() da biblioteca unistd.h)
+system("sleep 0.1"); //Função para dar um delay no console, em segundos. (porém essa funciona pode-se colocar décimo de segundo, ao contrário da função sleep() da biblioteca unistd.h)
 
 //Aqui é possível perceber a validação dos dados antes de ir para qualquer lado.
-//Para o efetivo funcionamento da função é assim: se a casa ao lado é um 10, ele pula para aquela casa e refaz toda a função, se não for 10, mas estiver fechada, ele abre a casa sem entrar na função novamente e aumenta as outras variáveis (numcasas e pontuacao), se estiver entre 0 e 9 não acontece nada, é ignorado.
+//O efetivo funcionamento da função é assim: se a casa ao lado é um 10, ele pula para aquela casa e refaz toda a função, se não for 10, mas estiver fechada, ele abre a casa sem entrar na função novamente e aumenta as outras variáveis (numcasas e pontuacao), se estiver entre 0 e 9 não acontece nada, é ignorado.
 //Como a função é recursiva, ele vai abrir a casa até a beira do tabuleiro depois verificar o próximo lado da casa anterior até a beira novamente; daí vai para a casa anterior e olha o próximo lado, e faz isso até que as casas estejam rodeadas pelos limites (a beira do tabuleiro ou um número entre 0 e 9).
 //Infelizmente é necessário fazer um switch para cada vez que abrir uma casa diferente de 0 para que a pontuação seja consistente, deixando o código bem mais longo (poderia ser feito em uma função separada?)
 
